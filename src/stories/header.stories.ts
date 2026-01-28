@@ -2,96 +2,114 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { Header, NavItem } from '../app/components/header/header';
 
 const meta: Meta<Header> = {
-  title: 'Components/Header',
+  title: 'Components / Header',
   component: Header,
+  parameters: {
+    layout: 'fullscreen', // header full width varanum
+  },
 };
 
 export default meta;
 
 type Story = StoryObj<Header>;
 
+
 // --------------------------------------------------
-// 1️⃣ BASIC – only header, no navigation
+// 1️⃣ BASIC HEADER (no dropdown open by default)
 // --------------------------------------------------
+
 export const Basic: Story = {
-  name: 'Basic Header',
   args: {
-    navigation: []
-  }
+    lang: 'en',
+    breadcrumbLevel: 'home',
+  },
 };
 
 
 // --------------------------------------------------
-// 2️⃣ WITHOUT DROPDOWN – menu only
+// 2️⃣ HEADER WITH DROPDOWNS (click to open)
 // --------------------------------------------------
-const navigationWithoutDropdown: NavItem[] = [
-  { label: 'HOME', link: '#' },
-  { label: 'ABOUT', link: '#' },
-  { label: 'CONTACT', link: '#' }
-];
 
-export const WithoutDropdown: Story = {
-  name: 'Without Dropdown',
-  args: {
-    navigation: []
-  }
-};
-
-
-// --------------------------------------------------
-// 3️⃣ WITH DROPDOWN – full navigation
-// --------------------------------------------------
 const navigationWithDropdown: NavItem[] = [
-
   {
     label: 'FIND & EXPLORE',
     key: 'findExplore',
     sections: [
       {
         title: 'Databases',
-        links: ['UPOV Lex', 'PLUTO Search', 'GENIE']
+        links: ['UPOV Lex', 'PLUTO Search', 'GENIE'],
       },
       {
         title: 'Information & Guidance',
         links: [
           'Explanatory Notes',
           'Information Documents',
-          'Test Guidelines'
-        ]
-      }
-    ]
+          'Test Guidelines',
+        ],
+      },
+    ],
   },
-
-
   {
     label: 'PLANT VARIETY PROTECTION',
     key: 'plantVariety',
     sections: [
       {
         title: 'Learn',
-        links: ['FAQs', 'Case Studies', 'Farmers', 'Breeders']
-      }
-    ]
-
+        links: ['FAQs', 'Case Studies', 'Farmers', 'Breeders'],
+      },
+    ],
   },
-
   {
     label: 'FILE & MANAGE',
     key: 'fileManage',
     sections: [
       {
         title: 'Services',
-        links: ['UPOV PRISMA', 'e-PVP Exchange']
-      }
-    ]
-  }
-
+        links: ['UPOV PRISMA', 'e-PVP Exchange'],
+      },
+    ],
+  },
+  {
+    label: 'ABOUT UPOV',
+    key: 'aboutUpov',
+    sections: [
+      {
+        title: 'Overview',
+        links: ['News', 'Members', 'Meetings & Events'],
+      },
+    ],
+  },
 ];
 
-export const WithDropdown: Story = {
-  name: 'With Dropdown',
+export const WithDropdowns: Story = {
+  name: 'With Dropdown Menus',
   args: {
-    navigation: navigationWithDropdown
-  }
+    lang: 'en',
+    breadcrumbLevel: 'home',
+    navigation: navigationWithDropdown,
+  },
 };
+
+
+// --------------------------------------------------
+// 3️⃣ OPEN DROPDOWN BY DEFAULT (for UI review)
+// --------------------------------------------------
+
+export const DropdownOpened: Story = {
+  name: 'Dropdown – Open State',
+  args: {
+    lang: 'en',
+    breadcrumbLevel: 'home',
+    navigation: navigationWithDropdown,
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      activeDropdown: 'findExplore', // 👈 default open
+    },
+    
+  }),
+
+};
+
 
