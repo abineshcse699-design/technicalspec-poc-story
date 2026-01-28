@@ -8,7 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [CommonModule, MatIconModule],
   templateUrl: './authority-card.html',
   styleUrls: ['./authority-card.scss'],
+
 })
+
 export class AuthorityCard {
   @Input() countryName = '';
   @Input() countryIso = '';
@@ -23,4 +25,5 @@ export class AuthorityCard {
 
   @Input() coverageType?: string;
   @Input() memberSince?: string;
+
 }
