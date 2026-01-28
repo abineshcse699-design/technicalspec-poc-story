@@ -1,0 +1,66 @@
+<div class="authority-card">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="flag-wrapper">
+      <img
+        *ngIf="flag"
+        [src]="flag"
+        [alt]="countryName"
+        (error)="onImageError($event)"
+      />
+
+      <div *ngIf="!flag" class="flag-placeholder">
+        <mat-icon>public</mat-icon>
+      </div>
+    </div>
+
+    <div class="header-text">
+      <h3 class="country">
+        {{ countryName || '—' }}
+        <span *ngIf="isoCode" class="iso">({{ isoCode }})</span>
+      </h3>
+
+      <p class="authority-name">
+        {{ authorityName || '—' }}
+      </p>
+    </div>
+  </div>
+
+  <!-- PROTECTION INFO -->
+  <div class="protection" *ngIf="totalSpecies || coverageType">
+    <div class="protection-item" *ngIf="totalSpecies !== undefined">
+      <mat-icon>spa</mat-icon>
+      <span>
+        <strong>{{ totalSpecies }}</strong> taxa
+      </span>
+    </div>
+
+    <div class="protection-item" *ngIf="coverageType">
+      <mat-icon>verified</mat-icon>
+      <span>{{ coverageType }}</span>
+    </div>
+  </div>
+
+  <!-- CONTACT INFO -->
+  <div class="contact" *ngIf="phone || email || website">
+
+    <div class="contact-item" *ngIf="phone">
+      <mat-icon>phone</mat-icon>
+      <span>{{ phone }}</span>
+    </div>
+
+    <div class="contact-item" *ngIf="email">
+      <mat-icon>email</mat-icon>
+      <a [href]="'mailto:' + email">{{ email }}</a>
+    </div>
+
+    <div class="contact-item" *ngIf="website">
+      <mat-icon>language</mat-icon>
+      <a [href]="website" target="_blank" rel="noopener">
+        {{ website }}
+      </a>
+    </div>
+
+  </div>
+</div>
