@@ -1,50 +1,46 @@
 <div class="authority-card">
 
-  <!-- HEADER -->
+  <!-- Header -->
   <div class="header">
-    <div class="flag-wrapper">
+    <div class="flag">
       <img
-        *ngIf="flag"
-        [src]="flag"
+        *ngIf="flagUrl"
+        [src]="flagUrl"
         [alt]="countryName"
-        (error)="onImageError($event)"
+        (error)="flagUrl = ''"
       />
-
-      <div *ngIf="!flag" class="flag-placeholder">
-        <mat-icon>public</mat-icon>
-      </div>
+      <div *ngIf="!flagUrl" class="flag-placeholder"></div>
     </div>
 
-    <div class="header-text">
-      <h3 class="country">
-        {{ countryName || '—' }}
-        <span *ngIf="isoCode" class="iso">({{ isoCode }})</span>
-      </h3>
-
-      <p class="authority-name">
-        {{ authorityName || '—' }}
-      </p>
+    <div class="country">
+      <h3>{{ countryName }}</h3>
+      <span *ngIf="countryIso">({{ countryIso }})</span>
     </div>
   </div>
 
-  <!-- PROTECTION INFO -->
-  <div class="protection" *ngIf="totalSpecies || coverageType">
-    <div class="protection-item" *ngIf="totalSpecies !== undefined">
-      <mat-icon>spa</mat-icon>
-      <span>
-        <strong>{{ totalSpecies }}</strong> taxa
-      </span>
-    </div>
+  <!-- Authority -->
+  <div class="authority-info">
+    <strong>{{ authorityName }}</strong>
+    <p *ngIf="department">{{ department }}</p>
+  </div>
 
-    <div class="protection-item" *ngIf="coverageType">
+  <!-- Protection -->
+  <div class="protection" *ngIf="coverageType || memberSince">
+    <div *ngIf="coverageType">
       <mat-icon>verified</mat-icon>
       <span>{{ coverageType }}</span>
     </div>
+
+    <div *ngIf="memberSince">
+      <mat-icon>event</mat-icon>
+      <span>Member since {{ memberSince }}</span>
+    </div>
   </div>
 
-  <!-- CONTACT INFO -->
-  <div class="contact" *ngIf="phone || email || website">
+  <hr />
 
+  <!-- Contact -->
+  <div class="contact">
     <div class="contact-item" *ngIf="phone">
       <mat-icon>phone</mat-icon>
       <span>{{ phone }}</span>
@@ -52,15 +48,13 @@
 
     <div class="contact-item" *ngIf="email">
       <mat-icon>email</mat-icon>
-      <a [href]="'mailto:' + email">{{ email }}</a>
+      <span class="link">{{ email }}</span>
     </div>
 
     <div class="contact-item" *ngIf="website">
       <mat-icon>language</mat-icon>
-      <a [href]="website" target="_blank" rel="noopener">
-        {{ website }}
-      </a>
+      <span class="link">{{ website }}</span>
     </div>
-
   </div>
+
 </div>
