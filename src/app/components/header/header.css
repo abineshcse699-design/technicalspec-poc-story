@@ -1,0 +1,342 @@
+
+/* Header Styles - EXACT Figma Dimensions */
+/* Total header section: 1440px × 109px */
+/* Header: 1440px × 69px */
+/* Breadcrumb: 1440px × 40px */
+
+/* Remove any default body margins */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Wrapper for entire header section */
+#upov-header {
+  width: 100%;
+  background-color: #1C4240;
+}
+
+.upov-header-main {
+  width: 100%;
+}
+
+.header {
+  background-color: #1C4240;
+  color: #ffffff;
+  font-family: 'Figtree', 'Roboto', "Helvetica Neue", sans-serif;
+  width: 100%;
+  height: 69px; /* EXACT Figma height */
+  margin: 0;
+  padding: 0;
+}
+
+.header-container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 140px; /* Exact left/right padding from Figma */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 69px; /* EXACT Figma height */
+  box-sizing: border-box;
+}
+
+.header-logo {
+  flex-shrink: 0;
+  height: 25px;
+  display: flex;
+  align-items: center;
+
+  a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    line-height: 0;
+  }
+
+  img {
+    height: 25px; /* EXACT from Figma */
+    width: 91.46px; /* EXACT from Figma */
+    display: block;
+  }
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+  justify-content: flex-end;
+  height: 69px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 69px;
+}
+
+.nav-item {
+  position: relative;
+  height: 69px;
+  display: flex;
+  align-items: center;
+
+  &.has-dropdown {
+    position: relative;
+  }
+}
+
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px; /* EXACT from Figma */
+  font-weight: 500; /* EXACT from Figma */
+  letter-spacing: 0.5px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+  font-family: 'Figtree', 'Roboto', sans-serif;
+  height: 69px; /* Full header height */
+  box-sizing: border-box;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.dropdown-toggle {
+  .dropdown-icon {
+    width: 8px;
+    height: 5px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  &:hover .dropdown-icon {
+    transform: translateY(1px);
+  }
+
+  &.active .dropdown-icon {
+    transform: rotate(180deg);
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #DADE14;
+  min-width: 280px;
+  padding: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  border-radius: 0;
+  z-index: 1000;
+  margin: 0;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-section {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.dropdown-heading {
+  color: #1C4240;
+  font-size: 16px;
+  font-weight: 700; /* Bold */
+  margin: 0 0 12px 0;
+  padding: 0;
+  font-family: 'Figtree', 'Roboto', sans-serif;
+  line-height: 1.2;
+}
+
+.dropdown-link {
+  display: block;
+  color: #1C4240;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500; /* Medium */
+  padding: 10px 0;
+  transition: padding-left 0.3s ease;
+  font-family: 'Figtree', 'Roboto', sans-serif;
+  line-height: 1.4;
+
+  &:hover {
+    padding-left: 8px;
+  }
+}
+
+/* // For FILE & MANAGE dropdown (no sections, just links) */
+.nav-item:nth-child(4) .dropdown-menu {
+  .dropdown-link {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      padding-left: 32px;
+    }
+  }
+}
+
+/* // For ABOUT UPOV dropdown (no sections, just links) */
+.nav-item:nth-child(5) .dropdown-menu {
+  .dropdown-link {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      padding-left: 32px;
+    }
+  }
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+  width: 24px; /* EXACT from Figma - Image 1 */
+  height: 24px; /* EXACT from Figma - Image 1 */
+  margin-left: 8px;
+  position: relative;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  svg {
+    width: 18px; /* EXACT from Figma - Image 2 */
+    height: 18px; /* EXACT from Figma - Image 2 */
+    position: absolute;
+    top: 3px; /* EXACT from Figma - Image 2 */
+    left: 3px; /* EXACT from Figma - Image 2 */
+  }
+}
+
+/* Breadcrumb - EXACT Figma Dimensions - NO GAP */
+/* Height: 40px EXACT */
+#upov-breadcrumb {
+  background: #DADE14;
+  width: 100%;
+  height: 40px; /* EXACT Figma height */
+  display: flex;
+  align-items: center;
+  margin: 0; /* NO GAP */
+  padding: 0;
+
+  nav {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 140px; /* Match header padding */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .breadcrumb {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    height: 100%;
+  }
+
+  .breadcrumb-item {
+    font-size: 16px; /* EXACT Body/Medium/16px */
+    font-weight: 500; /* Medium */
+    font-family: 'Figtree', 'Roboto', sans-serif;
+    color: #1C4240;
+    line-height: 19px; /* EXACT from Figma */
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child)::after {
+      content: '/';
+      padding: 0 8px;
+      color: #1C4240;
+    }
+
+    .breadcrumb-link {
+      color: #1C4240;
+      text-decoration: none;
+            font-weight: 800;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .breadcrumb-text-truncate {
+      display: inline;
+    }
+
+    &.active,
+    .active {
+      color: #1C4240;
+      font-weight: 500;
+    }
+  }
+}
+
+
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-start {
+  align-items: flex-start;
+}

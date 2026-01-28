@@ -1,0 +1,1596 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "NavItem",
+            "id": "interface-NavItem-34f8b028ee8034574d640a78a2b9bf856b1e985490695c88754b6bb7e676057f6d97915dd905294b9241a708b856b1e3984d7f94fc6f16867f8f68f066bca92c",
+            "file": "src/app/components/header/header.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input, HostListener } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { RouterOutlet } from \"../../../../node_modules/@angular/router/types/_router_module-chunk\";\r\nimport { MatCardModule } from '@angular/material/card';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\n\r\nexport interface NavItem {\r\n  label: string;\r\n  link?: string;\r\n  key?: string;\r\n  sections?: {\r\n    title: string;\r\n    links: string[];\r\n  }[];\r\n}\r\n\r\n@Component({\r\n  selector: 'app-header',\r\n  standalone: true,\r\n  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule],\r\n  templateUrl: './header.html',\r\n  styleUrls: ['./header.css']\r\n})\r\nexport class Header {\r\n\r\n  // ✅ ADD THIS\r\n  @Input() navigation: NavItem[] = [];\r\n\r\n  @Input() lang: string = 'en';\r\n  @Input() breadcrumbLevel: string | null = null;\r\n  @Input() breadcrumbText: string | null = null;\r\n  @Input() breadcrumbLink: string | null = null;\r\n\r\n  activeDropdown: string | null = null;\r\n\r\n  get translations() {\r\n    const translations: { [key: string]: any } = {\r\n      en: {\r\n        findExplore: 'Find & Explore',\r\n        databases: 'Databases',\r\n        genieHome: 'GENIE Database',\r\n        searchResults: 'Search Results',\r\n        authorities: 'Authorities',\r\n        authorityDetails: 'Authority Details'\r\n      },\r\n      fr: {\r\n        findExplore: 'Trouver & Explorer',\r\n        databases: 'Bases de données',\r\n        genieHome: 'Base de données GENIE',\r\n        searchResults: 'Résultats de recherche',\r\n        authorities: 'Services',\r\n        authorityDetails: 'Détails du service'\r\n      },\r\n      es: {\r\n        findExplore: 'Buscar y Explorar',\r\n        databases: 'Bases de datos',\r\n        genieHome: 'Base de datos GENIE',\r\n        searchResults: 'Resultados de búsqueda',\r\n        authorities: 'Autoridades',\r\n        authorityDetails: 'Detalles de la autoridad'\r\n      },\r\n      de: {\r\n        findExplore: 'Finden & Erkunden',\r\n        databases: 'Datenbanken',\r\n        genieHome: 'GENIE-Datenbank',\r\n        searchResults: 'Suchergebnisse',\r\n        authorities: 'Behörden',\r\n        authorityDetails: 'Behördendetails'\r\n      }\r\n    };\r\n    return translations[this.lang] || translations['en'];\r\n  }\r\n\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  onDocumentClick(event: MouseEvent): void {\r\n    const target = event.target as HTMLElement;\r\n    if (!target.closest('.nav-item')) {\r\n      this.activeDropdown = null;\r\n    }\r\n  }\r\n\r\n  toggleDropdown(dropdownName: string): void {\r\n    this.activeDropdown =\r\n      this.activeDropdown === dropdownName ? null : dropdownName;\r\n  }\r\n\r\n}\r\n\r\n",
+            "properties": [
+                {
+                    "name": "key",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "link",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "sections",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type[]",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 12
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "StateExpression",
+            "id": "interface-StateExpression-4d2c04f80d5145ea78ab43334acbf60d596cd61ba5373e5f5641264b95f7c35ec4e45e52fa4e05a79710c71c32d64a56ca0ecac74cd816242a50b7df31a75b06",
+            "file": "src/app/components/page12/page12.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { MatFormFieldModule } from '@angular/material/form-field';\r\nimport { MatInputModule } from '@angular/material/input';\r\nimport { MatSelectModule } from '@angular/material/select';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatButtonModule } from '@angular/material/button';\r\n\r\ninterface StateExpression {\r\n  state: string;\r\n  notes: string;\r\n  varieties: string[];\r\n}\r\n\r\n@Component({\r\n\r\n  selector: 'app-page12',\r\n  imports:\r\n   [\r\n    CommonModule,\r\n    FormsModule,\r\n    MatFormFieldModule,\r\n    MatInputModule,\r\n    MatSelectModule,\r\n    MatIconModule,\r\n    MatButtonModule\r\n  ],\r\n\r\n  templateUrl: './page12.html',\r\n  styleUrl: './page12.css',\r\n\r\n})\r\n\r\nexport class Page12 {\r\n  stateExpressions: StateExpression[] = [\r\n    {\r\n      state: 'Leaf: length',\r\n      notes: '1',\r\n      varieties: ['1', '2', '3', '4']\r\n    },\r\n    {\r\n      state: 'Leaf: length',\r\n      notes: '2',\r\n      varieties: ['1', '2', '3', '4']\r\n    }\r\n  ];\r\n\r\n  noteOptions = ['1', '2', '3', '4', '5'];\r\n\r\n  removeVariety(stateIndex: number, varietyIndex: number) {\r\n    this.stateExpressions[stateIndex].varieties.splice(varietyIndex, 1);\r\n  }\r\n\r\n  removeState(index: number) {\r\n    if (this.stateExpressions.length > 1) {\r\n      this.stateExpressions.splice(index, 1);\r\n    }\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "notes",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "state",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "varieties",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "StateExpression",
+            "id": "interface-StateExpression-c7802c2a6686d18fcc28f8f4c3fe17c0eedafeddf5679fd78ab761d2551dc1d2676d8f59dab4185fb68f41a29c906b36cc4cbb32eb4fc020de9b3f7283dac82c-1",
+            "file": "src/app/components/page/page.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { MatCheckboxModule } from '@angular/material/checkbox';\r\nimport { MatFormFieldModule } from '@angular/material/form-field';\r\nimport { MatInputModule } from '@angular/material/input';\r\nimport { MatSelectModule } from '@angular/material/select';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatChipsModule } from '@angular/material/chips';\r\n\r\ninterface StateExpression {\r\n  state: string;\r\n  notes: string;\r\n  varieties: string[];\r\n\r\n}\r\n\r\n@Component({\r\n  selector: 'app-page',\r\n  imports: [\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    MatCheckboxModule,\r\n    MatFormFieldModule,\r\n    MatInputModule,\r\n    MatSelectModule,\r\n    MatButtonModule,\r\n    MatIconModule,\r\n    MatChipsModule\r\n  ],\r\n\r\n\r\n  templateUrl: './page.html',\r\n  styleUrl: './page.css',\r\n\r\n})\r\nexport class Page {\r\n\r\n  astericsChecked = true;\r\n  groupingChecked = true;\r\n  tq5Checked = true;\r\n\r\n  characteristicName = 'Leaf: length';\r\n  expressionType = 'QN';\r\n  growthStage = '00';\r\n\r\n  mgChecked = true;\r\n  msChecked = true;\r\n  vgChecked = false;\r\n  vsChecked = false;\r\n  otherChecked = false;\r\n\r\n  mgPlotType = '';\r\n  msPlotType = '';\r\n\r\n  stateExpressions: StateExpression[] = [\r\n    {\r\n      state: 'Leaf: length',\r\n      notes: '1',\r\n      varieties: ['1', '2', '3', '4']\r\n    },\r\n    {\r\n      state: 'Leaf: length',\r\n      notes: '2',\r\n      varieties: ['1', '2', '3', '4']\r\n    }\r\n\r\n  ];\r\n\r\n  explanation = '';\r\n\r\n  expressionTypes = ['QN', 'QL', 'PQ'];\r\n  plotTypes = ['Type 1', 'Type 2', 'Type 3'];\r\n  noteOptions = ['1', '2', '3', '4', '5'];\r\n\r\n  addNewState() {\r\n    this.stateExpressions.push({\r\n      state: '',\r\n      notes: '',\r\n      varieties: []\r\n    });\r\n  }\r\n\r\n  removeState(index: number) {\r\n    if (this.stateExpressions.length > 1) {\r\n      this.stateExpressions.splice(index, 1);\r\n    }\r\n  }\r\n\r\n  removeVariety(stateIndex: number, varietyIndex: number) {\r\n    this.stateExpressions[stateIndex].varieties.splice(varietyIndex, 1);\r\n  }\r\n  \r\n}\r\n",
+            "properties": [
+                {
+                    "name": "notes",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "state",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "varieties",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": [],
+            "isDuplicate": true,
+            "duplicateId": 1,
+            "duplicateName": "StateExpression-1"
+        },
+        {
+            "name": "User",
+            "id": "interface-User-d4821beac0e4a852e513391b7470981c4353fdd95a18628bb68136c8695b489ee15b926e2e5031bc26cf30e1508e0a362c3ee13a06734702b4d15af140e485d5",
+            "file": "src/stories/user.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface User {\n  name: string;\n}\n",
+            "properties": [
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        }
+    ],
+    "injectables": [],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [],
+    "components": [
+        {
+            "name": "App",
+            "id": "component-App-081241767e5faa71e0b2bac840b20a97a20ed8952e14438fa607f6e37454957bf31e4d18c0ac21c5faab4c8680b5966278c012d11cb46d35eef6130817604eac",
+            "file": "src/app/app.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./app.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "title",
+                    "defaultValue": "signal('tt')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "RouterOutlet"
+                },
+                {
+                    "name": "Header"
+                },
+                {
+                    "name": "Footer"
+                },
+                {
+                    "name": "Page"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, signal } from '@angular/core';\r\nimport { RouterOutlet } from '@angular/router';\r\nimport { Header } from './components/header/header';\r\nimport { Footer } from \"./components/footer/footer\";\r\nimport { Page } from \"./components/page/page\";\r\n\r\n\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  imports: [RouterOutlet, Header, Footer, Page],\r\n  templateUrl: './app.html',\r\n  styleUrl: './app.css'\r\n})\r\nexport class App {\r\n  protected readonly title = signal('tt');\r\n}\r\n",
+            "styleUrl": "./app.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<app-header></app-header>\r\n\r\n<app-page></app-page>\r\n<router-outlet></router-outlet>\r\n\r\n<app-footer></app-footer>\r\n"
+        },
+        {
+            "name": "ButtonComponent",
+            "id": "component-ButtonComponent-d7bf0323e6da130e2609e2af0117b4a8d7cd874132206af50bf43dfc37044485fe50f2867ea76525730dd195b9b95a43802a12dadc6ad5cd7bf2faa07f19f0da",
+            "file": "src/stories/button.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-button",
+            "styleUrls": [
+                "./button.css"
+            ],
+            "styles": [],
+            "template": " <button  type=\"button\"\n  (click)=\"onClick.emit($event)\"\n  [ngClass]=\"classes\"\n  [ngStyle]=\"{ 'background-color': backgroundColor }\"\n>\n  {{ label }}\n</button>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "backgroundColor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nWhat background color to use",
+                    "description": "<p>What background color to use</p>\n",
+                    "line": 25,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Button'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "pos": 760,
+                            "end": 773,
+                            "kind": 328,
+                            "id": 0,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "tagName": {
+                                "pos": 761,
+                                "end": 769,
+                                "kind": 80,
+                                "id": 0,
+                                "flags": 16842752,
+                                "transformFlags": 0,
+                                "escapedText": "required"
+                            },
+                            "comment": ""
+                        }
+                    ],
+                    "rawdescription": "\n\nButton contents\n\n",
+                    "description": "<p>Button contents</p>\n",
+                    "line": 37,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "primary",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nIs this the principal call to action on the page?",
+                    "description": "<p>Is this the principal call to action on the page?</p>\n",
+                    "line": 21,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'medium'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nHow large should the button be?",
+                    "description": "<p>How large should the button be?</p>\n",
+                    "line": 29,
+                    "type": "\"small\" | \"medium\" | \"large\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onClick",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nOptional click handler",
+                    "description": "<p>Optional click handler</p>\n",
+                    "line": 41,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  standalone: true,\n  imports: [CommonModule],\n  template: ` <button\n  type=\"button\"\n  (click)=\"onClick.emit($event)\"\n  [ngClass]=\"classes\"\n  [ngStyle]=\"{ 'background-color': backgroundColor }\"\n>\n  {{ label }}\n</button>`,\n  styleUrls: ['./button.css'],\n})\nexport class ButtonComponent {\n  /** Is this the principal call to action on the page? */\n  @Input()\n  primary = false;\n\n  /** What background color to use */\n  @Input()\n  backgroundColor?: string;\n\n  /** How large should the button be? */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /** Optional click handler */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-button {\n  display: inline-block;\n  cursor: pointer;\n  border: 0;\n  border-radius: 3em;\n  font-weight: 700;\n  line-height: 1;\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n}\n.storybook-button--primary {\n  background-color: #555ab9;\n  color: white;\n}\n.storybook-button--secondary {\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n  background-color: transparent;\n  color: #333;\n}\n.storybook-button--small {\n  padding: 10px 16px;\n  font-size: 12px;\n}\n.storybook-button--medium {\n  padding: 11px 20px;\n  font-size: 14px;\n}\n.storybook-button--large {\n  padding: 12px 24px;\n  font-size: 16px;\n}\n",
+                    "styleUrl": "./button.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 43
+                    }
+                }
+            }
+        },
+        {
+            "name": "Footer",
+            "id": "component-Footer-4fc5223ec2bef23889fbbd0d8df0e7e07beaf1db092232b4a92be0020b6698d85d265abc270bc450abf36b570214026381522b3cec10a9c6c948892a0ccf94af",
+            "file": "src/app/components/footer/footer.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-footer",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./footer.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "lang",
+                    "defaultValue": "'en'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n\r\n  selector: 'app-footer',\r\n  imports: [CommonModule],\r\n  templateUrl: './footer.html',\r\n  styleUrl: './footer.css',\r\n  standalone: true\r\n})\r\n\r\nexport class Footer {\r\n  @Input() lang: string = 'en';\r\n\r\n  // Translated strings\r\n  get translations() {\r\n    const translations: { [key: string]: any } = {\r\n      en: {\r\n        termsOfUse: 'Terms of Use',\r\n        privacy: 'Privacy',\r\n        sitemap: 'Sitemap',\r\n        accessibility: 'Accessibility',\r\n        description: 'UPOV promotes plant breeding worldwide by protecting new plant varieties, contributing to sustainable development and global food security.'\r\n      },\r\n      fr: {\r\n        termsOfUse: \"Conditions d'utilisation\",\r\n        privacy: 'Confidentialité',\r\n        sitemap: 'Plan du site',\r\n        accessibility: 'Accessibilité',\r\n        description: 'UPOV promotes plant breeding worldwide by protecting new plant varieties, contributing to sustainable development and global food security.'\r\n      },\r\n      es: {\r\n        termsOfUse: 'Condiciones de uso',\r\n        privacy: 'Privacidad',\r\n        sitemap: 'Mapa del sitio',\r\n        accessibility: 'Accesibilidad',\r\n        description: 'UPOV promotes plant breeding worldwide by protecting new plant varieties, contributing to sustainable development and global food security.'\r\n      },\r\n      de: {\r\n        termsOfUse: 'Nutzungsbedingungen',\r\n        privacy: 'Datenschutz',\r\n        sitemap: 'Sitemap',\r\n        accessibility: 'Barrierefreiheit',\r\n        description: 'UPOV promotes plant breeding worldwide by protecting new plant varieties, contributing to sustainable development and global food security.'\r\n      }\r\n    };\r\n    return translations[this.lang] || translations['en'];\r\n  }\r\n}\r\n",
+            "styleUrl": "./footer.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "translations": {
+                    "name": "translations",
+                    "getSignature": {
+                        "name": "translations",
+                        "type": "",
+                        "returnType": "",
+                        "line": 17
+                    }
+                }
+            },
+            "templateData": "<!-- footer.component.html -->\r\n<footer id=\"upov-footer\">\r\n  <div class=\"footer-container\">\r\n    <div class=\"footer-content\">\r\n      <!-- Logo Section -->\r\n      <div class=\"footer-logo\">\r\n        <a href=\"https://www.upov.int/\">\r\n          <img src=\"https://www.wipo.int/web-assets/images/upov-logo-white.png\" alt=\"UPOV logo\">\r\n        </a>\r\n      </div>\r\n\r\n      <!-- Content Section -->\r\n      <div class=\"footer-right\">\r\n        <p class=\"footer-description\">{{ translations.description }}</p>\r\n\r\n        <!-- Social Media Icons -->\r\n        <div class=\"footer-social\">\r\n          <a href=\"https://x.com/upovint\" target=\"_blank\" aria-label=\"X (Twitter)\">\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\">\r\n              <path d=\"M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z\"/>\r\n            </svg>\r\n          </a>\r\n          <a href=\"https://www.linkedin.com/company/upov-official\" target=\"_blank\" aria-label=\"LinkedIn\">\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\">\r\n              <path d=\"M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z\"/>\r\n            </svg>\r\n          </a>\r\n          <a href=\"https://www.youtube.com/upov\" target=\"_blank\" aria-label=\"YouTube\">\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\">\r\n              <path d=\"M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z\"/>\r\n            </svg>\r\n          </a>\r\n          <a href=\"https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7254478502912053248\" target=\"_blank\" aria-label=\"Email\">\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\">\r\n              <path d=\"M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z\"/>\r\n            </svg>\r\n          </a>\r\n        </div>\r\n\r\n        <!-- Divider Line -->\r\n        <div class=\"footer-divider\"></div>\r\n\r\n        <!-- Footer Links -->\r\n        <div class=\"footer-links\">\r\n          <a [href]=\"'https://www.upov.int/' + lang + '/web/upov/terms-of-use'\" target=\"_blank\">{{ translations.termsOfUse }}</a>\r\n          <a [href]=\"'https://www.upov.int/' + lang + '/web/upov/privacy-notice'\" target=\"_blank\">{{ translations.privacy }}</a>\r\n          <a [href]=\"'https://www.upov.int/' + lang + '/web/upov/sitemap'\" target=\"_blank\">{{ translations.sitemap }}</a>\r\n          <a [href]=\"'https://www.upov.int/' + lang + '/web/upov/accessibility'\" target=\"_blank\">{{ translations.accessibility }}</a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</footer>\r\n"
+        },
+        {
+            "name": "Header",
+            "id": "component-Header-34f8b028ee8034574d640a78a2b9bf856b1e985490695c88754b6bb7e676057f6d97915dd905294b9241a708b856b1e3984d7f94fc6f16867f8f68f066bca92c",
+            "file": "src/app/components/header/header.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-header",
+            "styleUrls": [
+                "./header.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./header.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "breadcrumbLevel",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 31,
+                    "type": "string | null",
+                    "decorators": []
+                },
+                {
+                    "name": "breadcrumbLink",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 33,
+                    "type": "string | null",
+                    "decorators": []
+                },
+                {
+                    "name": "breadcrumbText",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 32,
+                    "type": "string | null",
+                    "decorators": []
+                },
+                {
+                    "name": "lang",
+                    "defaultValue": "'en'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "navigation",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 28,
+                    "type": "NavItem[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "activeDropdown",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 35
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onDocumentClick",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 77,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'document:click', ['$event']"
+                        }
+                    ],
+                    "modifierKind": [
+                        171
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "toggleDropdown",
+                    "args": [
+                        {
+                            "name": "dropdownName",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 84,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "dropdownName",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [
+                {
+                    "name": "document:click",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 77
+                }
+            ],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatCardModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatButtonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, HostListener } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { RouterOutlet } from \"../../../../node_modules/@angular/router/types/_router_module-chunk\";\r\nimport { MatCardModule } from '@angular/material/card';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\n\r\nexport interface NavItem {\r\n  label: string;\r\n  link?: string;\r\n  key?: string;\r\n  sections?: {\r\n    title: string;\r\n    links: string[];\r\n  }[];\r\n}\r\n\r\n@Component({\r\n  selector: 'app-header',\r\n  standalone: true,\r\n  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule],\r\n  templateUrl: './header.html',\r\n  styleUrls: ['./header.css']\r\n})\r\nexport class Header {\r\n\r\n  // ✅ ADD THIS\r\n  @Input() navigation: NavItem[] = [];\r\n\r\n  @Input() lang: string = 'en';\r\n  @Input() breadcrumbLevel: string | null = null;\r\n  @Input() breadcrumbText: string | null = null;\r\n  @Input() breadcrumbLink: string | null = null;\r\n\r\n  activeDropdown: string | null = null;\r\n\r\n  get translations() {\r\n    const translations: { [key: string]: any } = {\r\n      en: {\r\n        findExplore: 'Find & Explore',\r\n        databases: 'Databases',\r\n        genieHome: 'GENIE Database',\r\n        searchResults: 'Search Results',\r\n        authorities: 'Authorities',\r\n        authorityDetails: 'Authority Details'\r\n      },\r\n      fr: {\r\n        findExplore: 'Trouver & Explorer',\r\n        databases: 'Bases de données',\r\n        genieHome: 'Base de données GENIE',\r\n        searchResults: 'Résultats de recherche',\r\n        authorities: 'Services',\r\n        authorityDetails: 'Détails du service'\r\n      },\r\n      es: {\r\n        findExplore: 'Buscar y Explorar',\r\n        databases: 'Bases de datos',\r\n        genieHome: 'Base de datos GENIE',\r\n        searchResults: 'Resultados de búsqueda',\r\n        authorities: 'Autoridades',\r\n        authorityDetails: 'Detalles de la autoridad'\r\n      },\r\n      de: {\r\n        findExplore: 'Finden & Erkunden',\r\n        databases: 'Datenbanken',\r\n        genieHome: 'GENIE-Datenbank',\r\n        searchResults: 'Suchergebnisse',\r\n        authorities: 'Behörden',\r\n        authorityDetails: 'Behördendetails'\r\n      }\r\n    };\r\n    return translations[this.lang] || translations['en'];\r\n  }\r\n\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  onDocumentClick(event: MouseEvent): void {\r\n    const target = event.target as HTMLElement;\r\n    if (!target.closest('.nav-item')) {\r\n      this.activeDropdown = null;\r\n    }\r\n  }\r\n\r\n  toggleDropdown(dropdownName: string): void {\r\n    this.activeDropdown =\r\n      this.activeDropdown === dropdownName ? null : dropdownName;\r\n  }\r\n\r\n}\r\n\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "\r\n/* Header Styles - EXACT Figma Dimensions */\r\n/* Total header section: 1440px × 109px */\r\n/* Header: 1440px × 69px */\r\n/* Breadcrumb: 1440px × 40px */\r\n\r\n/* Remove any default body margins */\r\nbody {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\n/* Wrapper for entire header section */\r\n#upov-header {\r\n  width: 100%;\r\n  background-color: #1C4240;\r\n}\r\n\r\n.upov-header-main {\r\n  width: 100%;\r\n}\r\n\r\n.header {\r\n  background-color: #1C4240;\r\n  color: #ffffff;\r\n  font-family: 'Figtree', 'Roboto', \"Helvetica Neue\", sans-serif;\r\n  width: 100%;\r\n  height: 69px; /* EXACT Figma height */\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\n.header-container {\r\n  max-width: 1440px;\r\n  width: 100%;\r\n  margin: 0 auto;\r\n  padding: 0 140px; /* Exact left/right padding from Figma */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  height: 69px; /* EXACT Figma height */\r\n  box-sizing: border-box;\r\n}\r\n\r\n.header-logo {\r\n  flex-shrink: 0;\r\n  height: 25px;\r\n  display: flex;\r\n  align-items: center;\r\n\r\n  a {\r\n    display: flex;\r\n    align-items: center;\r\n    height: 100%;\r\n    line-height: 0;\r\n  }\r\n\r\n  img {\r\n    height: 25px; /* EXACT from Figma */\r\n    width: 91.46px; /* EXACT from Figma */\r\n    display: block;\r\n  }\r\n}\r\n\r\n.header-nav {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0;\r\n  flex: 1;\r\n  justify-content: flex-end;\r\n  height: 69px;\r\n}\r\n\r\n.nav-menu {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0;\r\n  list-style: none;\r\n  margin: 0;\r\n  padding: 0;\r\n  height: 69px;\r\n}\r\n\r\n.nav-item {\r\n  position: relative;\r\n  height: 69px;\r\n  display: flex;\r\n  align-items: center;\r\n\r\n  &.has-dropdown {\r\n    position: relative;\r\n  }\r\n}\r\n\r\n.nav-link {\r\n  color: #ffffff;\r\n  text-decoration: none;\r\n  font-size: 13px; /* EXACT from Figma */\r\n  font-weight: 500; /* EXACT from Figma */\r\n  letter-spacing: 0.5px;\r\n  padding: 0 16px;\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 6px;\r\n  background: none;\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: background-color 0.3s ease;\r\n  white-space: nowrap;\r\n  font-family: 'Figtree', 'Roboto', sans-serif;\r\n  height: 69px; /* Full header height */\r\n  box-sizing: border-box;\r\n  text-transform: uppercase;\r\n\r\n  &:hover {\r\n    background-color: rgba(255, 255, 255, 0.1);\r\n  }\r\n}\r\n\r\n.dropdown-toggle {\r\n  .dropdown-icon {\r\n    width: 8px;\r\n    height: 5px;\r\n    transition: transform 0.3s ease;\r\n    flex-shrink: 0;\r\n  }\r\n\r\n  &:hover .dropdown-icon {\r\n    transform: translateY(1px);\r\n  }\r\n\r\n  &.active .dropdown-icon {\r\n    transform: rotate(180deg);\r\n  }\r\n}\r\n\r\n.dropdown-menu {\r\n  position: absolute;\r\n  top: 100%;\r\n  left: 0;\r\n  background-color: #DADE14;\r\n  min-width: 280px;\r\n  padding: 0;\r\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);\r\n  opacity: 0;\r\n  visibility: hidden;\r\n  transform: translateY(-10px);\r\n  transition: all 0.3s ease;\r\n  border-radius: 0;\r\n  z-index: 1000;\r\n  margin: 0;\r\n\r\n  &.active {\r\n    opacity: 1;\r\n    visibility: visible;\r\n    transform: translateY(0);\r\n  }\r\n}\r\n\r\n.dropdown-section {\r\n  padding: 20px 24px;\r\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\r\n\r\n  &:last-child {\r\n    border-bottom: none;\r\n  }\r\n}\r\n\r\n.dropdown-heading {\r\n  color: #1C4240;\r\n  font-size: 16px;\r\n  font-weight: 700; /* Bold */\r\n  margin: 0 0 12px 0;\r\n  padding: 0;\r\n  font-family: 'Figtree', 'Roboto', sans-serif;\r\n  line-height: 1.2;\r\n}\r\n\r\n.dropdown-link {\r\n  display: block;\r\n  color: #1C4240;\r\n  text-decoration: none;\r\n  font-size: 15px;\r\n  font-weight: 500; /* Medium */\r\n  padding: 10px 0;\r\n  transition: padding-left 0.3s ease;\r\n  font-family: 'Figtree', 'Roboto', sans-serif;\r\n  line-height: 1.4;\r\n\r\n  &:hover {\r\n    padding-left: 8px;\r\n  }\r\n}\r\n\r\n/* // For FILE & MANAGE dropdown (no sections, just links) */\r\n.nav-item:nth-child(4) .dropdown-menu {\r\n  .dropdown-link {\r\n    padding: 16px 24px;\r\n    border-bottom: 1px solid rgba(0, 0, 0, 0.1);\r\n\r\n    &:last-child {\r\n      border-bottom: none;\r\n    }\r\n\r\n    &:hover {\r\n      padding-left: 32px;\r\n    }\r\n  }\r\n}\r\n\r\n/* // For ABOUT UPOV dropdown (no sections, just links) */\r\n.nav-item:nth-child(5) .dropdown-menu {\r\n  .dropdown-link {\r\n    padding: 16px 24px;\r\n    border-bottom: 1px solid rgba(0, 0, 0, 0.1);\r\n\r\n    &:last-child {\r\n      border-bottom: none;\r\n    }\r\n\r\n    &:hover {\r\n      padding-left: 32px;\r\n    }\r\n  }\r\n}\r\n\r\n.search-btn {\r\n  background: none;\r\n  border: none;\r\n  color: #ffffff;\r\n  cursor: pointer;\r\n  padding: 0;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  border-radius: 0;\r\n  transition: background-color 0.3s ease;\r\n  flex-shrink: 0;\r\n  width: 24px; /* EXACT from Figma - Image 1 */\r\n  height: 24px; /* EXACT from Figma - Image 1 */\r\n  margin-left: 8px;\r\n  position: relative;\r\n\r\n  &:hover {\r\n    background-color: rgba(255, 255, 255, 0.1);\r\n  }\r\n\r\n  svg {\r\n    width: 18px; /* EXACT from Figma - Image 2 */\r\n    height: 18px; /* EXACT from Figma - Image 2 */\r\n    position: absolute;\r\n    top: 3px; /* EXACT from Figma - Image 2 */\r\n    left: 3px; /* EXACT from Figma - Image 2 */\r\n  }\r\n}\r\n\r\n/* Breadcrumb - EXACT Figma Dimensions - NO GAP */\r\n/* Height: 40px EXACT */\r\n#upov-breadcrumb {\r\n  background: #DADE14;\r\n  width: 100%;\r\n  height: 40px; /* EXACT Figma height */\r\n  display: flex;\r\n  align-items: center;\r\n  margin: 0; /* NO GAP */\r\n  padding: 0;\r\n\r\n  nav {\r\n    max-width: 1440px;\r\n    width: 100%;\r\n    margin: 0 auto;\r\n    padding: 0 140px; /* Match header padding */\r\n    height: 100%;\r\n    display: flex;\r\n    align-items: center;\r\n    box-sizing: border-box;\r\n  }\r\n\r\n  .breadcrumb {\r\n    margin: 0;\r\n    padding: 0;\r\n    background: transparent;\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-items: center;\r\n    list-style: none;\r\n    height: 100%;\r\n  }\r\n\r\n  .breadcrumb-item {\r\n    font-size: 16px; /* EXACT Body/Medium/16px */\r\n    font-weight: 500; /* Medium */\r\n    font-family: 'Figtree', 'Roboto', sans-serif;\r\n    color: #1C4240;\r\n    line-height: 19px; /* EXACT from Figma */\r\n    display: flex;\r\n    align-items: center;\r\n\r\n    &:not(:last-child)::after {\r\n      content: '/';\r\n      padding: 0 8px;\r\n      color: #1C4240;\r\n    }\r\n\r\n    .breadcrumb-link {\r\n      color: #1C4240;\r\n      text-decoration: none;\r\n            font-weight: 800;\r\n\r\n      &:hover {\r\n        text-decoration: underline;\r\n      }\r\n    }\r\n\r\n    .breadcrumb-text-truncate {\r\n      display: inline;\r\n    }\r\n\r\n    &.active,\r\n    .active {\r\n      color: #1C4240;\r\n      font-weight: 500;\r\n    }\r\n  }\r\n}\r\n\r\n\r\n.flex {\r\n  display: flex;\r\n}\r\n\r\n.justify-between {\r\n  justify-content: space-between;\r\n}\r\n\r\n.items-center {\r\n  align-items: center;\r\n}\r\n\r\n.items-start {\r\n  align-items: flex-start;\r\n}\r\n",
+                    "styleUrl": "./header.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "translations": {
+                    "name": "translations",
+                    "getSignature": {
+                        "name": "translations",
+                        "type": "",
+                        "returnType": "",
+                        "line": 37
+                    }
+                }
+            },
+            "templateData": "<!-- Header start -->\r\n<header id=\"upov-header\">\r\n  <div class=\"upov-header-main\">\r\n    <div class=\"header\">\r\n      <div class=\"header-container\">\r\n        <div class=\"header-logo\">\r\n          <a href=\"https://www.upov.int/\">\r\n            <img src=\"https://www.wipo.int/web-assets/images/upov-logo-white.png\" alt=\"UPOV logo\">\r\n          </a>\r\n        </div>\r\n\r\n        <nav class=\"header-nav\">\r\n          <ul class=\"nav-menu\">\r\n            <li class=\"nav-item\">\r\n              <a href=\"#\" class=\"nav-link\">HOME</a>\r\n            </li>\r\n\r\n            <li class=\"nav-item has-dropdown\">\r\n              <button class=\"nav-link dropdown-toggle\" (click)=\"toggleDropdown('findExplore')\">\r\n                FIND & EXPLORE\r\n                <svg class=\"dropdown-icon\" width=\"8\" height=\"5\" viewBox=\"0 0 8 5\" fill=\"#DADE14\" xmlns=\"http://www.w3.org/2000/svg\">\r\n                  <polygon points=\"0,0 8,0 4,5\"/>\r\n                </svg>\r\n              </button>\r\n              <div class=\"dropdown-menu\" [class.active]=\"activeDropdown === 'findExplore'\">\r\n                <div class=\"dropdown-section\">\r\n                  <h3 class=\"dropdown-heading\">Databases</h3>\r\n                  <a href=\"#\" class=\"dropdown-link\">UPOV Lex</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">PLUTO Search</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">GENIE</a>\r\n                </div>\r\n                <div class=\"dropdown-section\">\r\n                  <h3 class=\"dropdown-heading\">Information & Guidance</h3>\r\n                  <a href=\"#\" class=\"dropdown-link\">Explanatory Notes</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">Information Documents</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">Examination Guidance</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">TGP Documents</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">Test Guidelines</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">TG Template</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">Additional Characteristics</a>\r\n                </div>\r\n                <div class=\"dropdown-section\">\r\n                  <h3 class=\"dropdown-heading\">IT Resources</h3>\r\n                </div>\r\n                <div class=\"dropdown-section\">\r\n                  <h3 class=\"dropdown-heading\">Jurisprudence</h3>\r\n                </div>\r\n              </div>\r\n            </li>\r\n\r\n            <li class=\"nav-item has-dropdown\">\r\n              <button class=\"nav-link dropdown-toggle\" (click)=\"toggleDropdown('plantVariety')\">\r\n                PLANT VARIETY PROTECTION\r\n                <svg class=\"dropdown-icon\" width=\"8\" height=\"5\" viewBox=\"0 0 8 5\" fill=\"#DADE14\" xmlns=\"http://www.w3.org/2000/svg\">\r\n                  <polygon points=\"0,0 8,0 4,5\"/>\r\n                </svg>\r\n              </button>\r\n              <div class=\"dropdown-menu\" [class.active]=\"activeDropdown === 'plantVariety'\">\r\n                <div class=\"dropdown-section\">\r\n                  <h3 class=\"dropdown-heading\">Learn</h3>\r\n                  <a href=\"#\" class=\"dropdown-link\">FAQs</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">Case Studies</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">Farmers</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">Breeders</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">Policy-makers</a>\r\n                </div>\r\n                <div class=\"dropdown-section\">\r\n                  <h3 class=\"dropdown-heading\">PVP Training</h3>\r\n                  <a href=\"#\" class=\"dropdown-link\">UPOV PVP Certificate</a>\r\n                  <a href=\"#\" class=\"dropdown-link\">Online Learning</a>\r\n                </div>\r\n                <div class=\"dropdown-section\">\r\n                  <h3 class=\"dropdown-heading\">PVP Statistics</h3>\r\n                </div>\r\n              </div>\r\n            </li>\r\n\r\n            <li class=\"nav-item has-dropdown\">\r\n              <button class=\"nav-link dropdown-toggle\" (click)=\"toggleDropdown('fileManage')\">\r\n                FILE & MANAGE\r\n                <svg class=\"dropdown-icon\" width=\"8\" height=\"5\" viewBox=\"0 0 8 5\" fill=\"#DADE14\" xmlns=\"http://www.w3.org/2000/svg\">\r\n                  <polygon points=\"0,0 8,0 4,5\"/>\r\n                </svg>\r\n              </button>\r\n              <div class=\"dropdown-menu\" [class.active]=\"activeDropdown === 'fileManage'\">\r\n                <a href=\"#\" class=\"dropdown-link\">UPOV PRISMA</a>\r\n                <a href=\"#\" class=\"dropdown-link\">UPOV e-PVP Exchange</a>\r\n                <a href=\"#\" class=\"dropdown-link\">UPOV e-PVP Administration</a>\r\n                <a href=\"#\" class=\"dropdown-link\">PLUTO Contribute</a>\r\n              </div>\r\n            </li>\r\n\r\n            <li class=\"nav-item has-dropdown\">\r\n              <button class=\"nav-link dropdown-toggle\" (click)=\"toggleDropdown('aboutUpov')\">\r\n                ABOUT UPOV\r\n                <svg class=\"dropdown-icon\" width=\"8\" height=\"5\" viewBox=\"0 0 8 5\" fill=\"#DADE14\" xmlns=\"http://www.w3.org/2000/svg\">\r\n                  <polygon points=\"0,0 8,0 4,5\"/>\r\n                </svg>\r\n              </button>\r\n              <div class=\"dropdown-menu\" [class.active]=\"activeDropdown === 'aboutUpov'\">\r\n                <a href=\"#\" class=\"dropdown-link\">Overview</a>\r\n                <a href=\"#\" class=\"dropdown-link\">News</a>\r\n                <a href=\"#\" class=\"dropdown-link\">Newsletter</a>\r\n                <a href=\"#\" class=\"dropdown-link\">Press Releases</a>\r\n                <a href=\"#\" class=\"dropdown-link\">Members</a>\r\n                <a href=\"#\" class=\"dropdown-link\">Observers</a>\r\n                <a href=\"#\" class=\"dropdown-link\">Meetings & Events</a>\r\n                <a href=\"#\" class=\"dropdown-link\">Publications</a>\r\n                <a href=\"#\" class=\"dropdown-link\">Job opportunities</a>\r\n              </div>\r\n            </li>\r\n          </ul>\r\n\r\n          <button class=\"search-btn\" aria-label=\"Search\">\r\n            <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">\r\n              <circle cx=\"11\" cy=\"11\" r=\"8\"></circle>\r\n              <path d=\"m21 21-4.35-4.35\"></path>\r\n            </svg>\r\n          </button>\r\n        </nav>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n<!-- Header end -->\r\n\r\n<!-- Breadcrumb start -->\r\n<div id=\"upov-breadcrumb\">\r\n  <nav aria-label=\"breadcrumb\">\r\n    <ol class=\"breadcrumb\">\r\n      <li class=\"breadcrumb-item\">\r\n        <a class=\"breadcrumb-link\" [href]=\"'https://www.upov.int/' + lang + '/find-and-explore'\">\r\n          <span class=\"breadcrumb-text-truncate\">{{ translations.findExplore }}</span>\r\n        </a>\r\n      </li>\r\n      <li class=\"breadcrumb-item\">\r\n        <a class=\"breadcrumb-link\" [href]=\"'https://www.upov.int/' + lang + '/find-and-explore/databases'\">\r\n          <span class=\"breadcrumb-text-truncate\">{{ translations.databases }}</span>\r\n        </a>\r\n      </li>\r\n      <li class=\"breadcrumb-item\">\r\n        <a class=\"breadcrumb-link\" [href]=\"'https://www.upov.int/' + lang + '/find-and-explore/databases/genie'\">\r\n          <span class=\"breadcrumb-text-truncate\">GENIE</span>\r\n        </a>\r\n      </li>\r\n\r\n      <!-- Home page -->\r\n      @if (breadcrumbLevel === 'home') {\r\n        <li class=\"breadcrumb-item\">\r\n          <span class=\"active breadcrumb-text-truncate\">{{ translations.genieHome }}</span>\r\n        </li>\r\n      }\r\n\r\n      <!-- Other pages -->\r\n      @if (breadcrumbLevel !== 'home') {\r\n        <li class=\"breadcrumb-item\">\r\n          <a class=\"breadcrumb-link\" [href]=\"'/genie/' + lang + '/'\">\r\n            <span class=\"breadcrumb-text-truncate\">{{ translations.genieHome }}</span>\r\n          </a>\r\n        </li>\r\n\r\n        <!-- Species search results -->\r\n        @if (breadcrumbLevel === 'species') {\r\n          <li class=\"breadcrumb-item\">\r\n            <span class=\"active breadcrumb-text-truncate\">{{ translations.searchResults }}</span>\r\n          </li>\r\n        }\r\n\r\n        <!-- Details page -->\r\n        @if (breadcrumbLevel === 'details') {\r\n          @if (breadcrumbLink) {\r\n            <li class=\"breadcrumb-item\">\r\n              <a class=\"breadcrumb-link\" [href]=\"breadcrumbLink\">\r\n                <span class=\"breadcrumb-text-truncate\">{{ translations.searchResults }}</span>\r\n              </a>\r\n            </li>\r\n          }\r\n          <li class=\"breadcrumb-item\">\r\n            <span class=\"active breadcrumb-text-truncate\">{{ breadcrumbText }}</span>\r\n          </li>\r\n        }\r\n\r\n        <!-- Authority page -->\r\n        @if (breadcrumbLevel === 'authority') {\r\n          <li class=\"breadcrumb-item\">\r\n            <a class=\"breadcrumb-link\" [href]=\"'/genie/' + lang + '/authority.jsp'\">\r\n              <span class=\"breadcrumb-text-truncate\">{{ translations.authorities }}</span>\r\n            </a>\r\n          </li>\r\n          <li class=\"breadcrumb-item\">\r\n            <span class=\"active breadcrumb-text-truncate\">{{ breadcrumbText }}</span>\r\n          </li>\r\n        }\r\n\r\n        <!-- Authority DUS page -->\r\n        @if (breadcrumbLevel === 'authority_dus') {\r\n          @if (breadcrumbLink) {\r\n            <li class=\"breadcrumb-item\">\r\n              <a class=\"breadcrumb-link\" [href]=\"'/genie/' + lang + '/authority.jsp'\">\r\n                <span class=\"breadcrumb-text-truncate\">{{ translations.authorities }}</span>\r\n              </a>\r\n            </li>\r\n            <li class=\"breadcrumb-item\">\r\n              <a class=\"breadcrumb-link\" [href]=\"breadcrumbLink\">\r\n                <span class=\"breadcrumb-text-truncate\">{{ breadcrumbText }}</span>\r\n              </a>\r\n            </li>\r\n          }\r\n          <li class=\"breadcrumb-item\">\r\n            <span class=\"active breadcrumb-text-truncate\">DUS</span>\r\n          </li>\r\n        }\r\n      }\r\n    </ol>\r\n  </nav>\r\n</div>\r\n<!-- Breadcrumb end -->\r\n\r\n\r\n\r\n"
+        },
+        {
+            "name": "HeaderComponent",
+            "id": "component-HeaderComponent-03ff5f0aaf70de3435241ac49ff34fb21c38c07488b6fe93e1be0f305a384b36328514c9495d5021f542625ac30e3e62b4d8e70b58c2671e0b1b9f70d467ca2c",
+            "file": "src/stories/header.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-header",
+            "styleUrls": [
+                "./header.css"
+            ],
+            "styles": [],
+            "template": "<header>  <div class=\"storybook-header\">\n    <div>\n      <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" fillRule=\"evenodd\">\n          <path\n            d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n            fill=\"#FFF\"\n          />\n          <path\n            d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n            fill=\"#555AB9\"\n          />\n          <path d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\" fill=\"#91BAF8\" />\n        </g>\n      </svg>\n      <h1>Acme</h1>\n    </div>\n    <div>\n      <div *ngIf=\"user\">\n        <span class=\"welcome\">\n          Welcome, <b>{{ user.name }}</b\n          >!\n        </span>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n      </div>\n      <div *ngIf=\"!user\">\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          class=\"margin-left\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          [primary]=\"true\"\n          class=\"margin-left\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </div>\n</header>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 70,
+                    "type": "User | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onCreateAccount",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 79,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogin",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 73,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogout",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 76,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ButtonComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { ButtonComponent } from './button.component';\nimport type { User } from './user';\n\n@Component({\n  selector: 'storybook-header',\n  standalone: true,\n  imports: [CommonModule, ButtonComponent],\n  template: `<header>\n  <div class=\"storybook-header\">\n    <div>\n      <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" fillRule=\"evenodd\">\n          <path\n            d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n            fill=\"#FFF\"\n          />\n          <path\n            d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n            fill=\"#555AB9\"\n          />\n          <path d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\" fill=\"#91BAF8\" />\n        </g>\n      </svg>\n      <h1>Acme</h1>\n    </div>\n    <div>\n      <div *ngIf=\"user\">\n        <span class=\"welcome\">\n          Welcome, <b>{{ user.name }}</b\n          >!\n        </span>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n      </div>\n      <div *ngIf=\"!user\">\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          class=\"margin-left\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          [primary]=\"true\"\n          class=\"margin-left\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </div>\n</header>`,\n\n  styleUrls: ['./header.css'],\n\n})\n\nexport class HeaderComponent {\n\n  @Input()\n  user: User | null = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n  \n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n}\n\n.storybook-header svg {\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-header h1 {\n  display: inline-block;\n  vertical-align: top;\n  margin: 6px 0 6px 10px;\n  font-weight: 700;\n  font-size: 20px;\n  line-height: 1;\n}\n\n.storybook-header button + button {\n  margin-left: 10px;\n}\n\n.storybook-header .welcome {\n  margin-right: 10px;\n  color: #333;\n  font-size: 14px;\n}\n",
+                    "styleUrl": "./header.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "Page",
+            "id": "component-Page-c7802c2a6686d18fcc28f8f4c3fe17c0eedafeddf5679fd78ab761d2551dc1d2676d8f59dab4185fb68f41a29c906b36cc4cbb32eb4fc020de9b3f7283dac82c",
+            "file": "src/app/components/page/page.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-page",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./page.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "astericsChecked",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 41
+                },
+                {
+                    "name": "characteristicName",
+                    "defaultValue": "'Leaf: length'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 45
+                },
+                {
+                    "name": "explanation",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 72
+                },
+                {
+                    "name": "expressionType",
+                    "defaultValue": "'QN'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 46
+                },
+                {
+                    "name": "expressionTypes",
+                    "defaultValue": "['QN', 'QL', 'PQ']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 74
+                },
+                {
+                    "name": "groupingChecked",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 42
+                },
+                {
+                    "name": "growthStage",
+                    "defaultValue": "'00'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 47
+                },
+                {
+                    "name": "mgChecked",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 49
+                },
+                {
+                    "name": "mgPlotType",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 55
+                },
+                {
+                    "name": "msChecked",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 50
+                },
+                {
+                    "name": "msPlotType",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 56
+                },
+                {
+                    "name": "noteOptions",
+                    "defaultValue": "['1', '2', '3', '4', '5']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 76
+                },
+                {
+                    "name": "otherChecked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 53
+                },
+                {
+                    "name": "plotTypes",
+                    "defaultValue": "['Type 1', 'Type 2', 'Type 3']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 75
+                },
+                {
+                    "name": "stateExpressions",
+                    "defaultValue": "[\r\n    {\r\n      state: 'Leaf: length',\r\n      notes: '1',\r\n      varieties: ['1', '2', '3', '4']\r\n    },\r\n    {\r\n      state: 'Leaf: length',\r\n      notes: '2',\r\n      varieties: ['1', '2', '3', '4']\r\n    }\r\n\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StateExpression[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 58
+                },
+                {
+                    "name": "tq5Checked",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 43
+                },
+                {
+                    "name": "vgChecked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 51
+                },
+                {
+                    "name": "vsChecked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 52
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "addNewState",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 78,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "removeState",
+                    "args": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 86,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "removeVariety",
+                    "args": [
+                        {
+                            "name": "stateIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "varietyIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 92,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "stateIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "varietyIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatCheckboxModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatFormFieldModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatInputModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatSelectModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatButtonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatChipsModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { MatCheckboxModule } from '@angular/material/checkbox';\r\nimport { MatFormFieldModule } from '@angular/material/form-field';\r\nimport { MatInputModule } from '@angular/material/input';\r\nimport { MatSelectModule } from '@angular/material/select';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatChipsModule } from '@angular/material/chips';\r\n\r\ninterface StateExpression {\r\n  state: string;\r\n  notes: string;\r\n  varieties: string[];\r\n\r\n}\r\n\r\n@Component({\r\n  selector: 'app-page',\r\n  imports: [\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    MatCheckboxModule,\r\n    MatFormFieldModule,\r\n    MatInputModule,\r\n    MatSelectModule,\r\n    MatButtonModule,\r\n    MatIconModule,\r\n    MatChipsModule\r\n  ],\r\n\r\n\r\n  templateUrl: './page.html',\r\n  styleUrl: './page.css',\r\n\r\n})\r\nexport class Page {\r\n\r\n  astericsChecked = true;\r\n  groupingChecked = true;\r\n  tq5Checked = true;\r\n\r\n  characteristicName = 'Leaf: length';\r\n  expressionType = 'QN';\r\n  growthStage = '00';\r\n\r\n  mgChecked = true;\r\n  msChecked = true;\r\n  vgChecked = false;\r\n  vsChecked = false;\r\n  otherChecked = false;\r\n\r\n  mgPlotType = '';\r\n  msPlotType = '';\r\n\r\n  stateExpressions: StateExpression[] = [\r\n    {\r\n      state: 'Leaf: length',\r\n      notes: '1',\r\n      varieties: ['1', '2', '3', '4']\r\n    },\r\n    {\r\n      state: 'Leaf: length',\r\n      notes: '2',\r\n      varieties: ['1', '2', '3', '4']\r\n    }\r\n\r\n  ];\r\n\r\n  explanation = '';\r\n\r\n  expressionTypes = ['QN', 'QL', 'PQ'];\r\n  plotTypes = ['Type 1', 'Type 2', 'Type 3'];\r\n  noteOptions = ['1', '2', '3', '4', '5'];\r\n\r\n  addNewState() {\r\n    this.stateExpressions.push({\r\n      state: '',\r\n      notes: '',\r\n      varieties: []\r\n    });\r\n  }\r\n\r\n  removeState(index: number) {\r\n    if (this.stateExpressions.length > 1) {\r\n      this.stateExpressions.splice(index, 1);\r\n    }\r\n  }\r\n\r\n  removeVariety(stateIndex: number, varietyIndex: number) {\r\n    this.stateExpressions[stateIndex].varieties.splice(varietyIndex, 1);\r\n  }\r\n  \r\n}\r\n",
+            "styleUrl": "./page.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"min-h-screen bg-gray-50 p-8\">\r\n  <div class=\"max-w-6xl mx-auto bg-white rounded-lg shadow-lg\">\r\n    <!-- Header -->\r\n    <div class=\"flex items-center justify-between p-6 border-b border-gray-200\">\r\n      <div>\r\n        <h1 class=\"text-2xl font-semibold text-gray-900\">Edit Characteristics</h1>\r\n        <p class=\"text-sm text-gray-600 mt-1\">Some fields are mandatory and must be completed (*)</p>\r\n      </div>\r\n      <button mat-icon-button class=\"!w-10 !h-10 bg-gray-900 text-white rounded-full hover:bg-gray-800\">\r\n        \r\n        <mat-icon>close</mat-icon>\r\n\r\n      </button>\r\n\r\n    </div>\r\n\r\n    <div class=\"p-6\">\r\n      <!-- Specific Functions -->\r\n      <div class=\"mb-8\">\r\n        <h2 class=\"text-base font-medium text-gray-700 mb-4\">Specific functions</h2>\r\n        <div class=\"flex gap-6\">\r\n          <mat-checkbox [(ngModel)]=\"astericsChecked\" color=\"primary\" class=\"custom-checkbox\">\r\n            <span class=\"text-gray-700\">Asterics characteristic</span>\r\n          </mat-checkbox>\r\n          <mat-checkbox [(ngModel)]=\"groupingChecked\" color=\"primary\" class=\"custom-checkbox\">\r\n            <span class=\"text-gray-700\">Grouping characteristics</span>\r\n          </mat-checkbox>\r\n          <mat-checkbox [(ngModel)]=\"tq5Checked\" color=\"primary\" class=\"custom-checkbox\">\r\n            <span class=\"text-gray-700\">Add to TQ5 characteristics</span>\r\n          </mat-checkbox>\r\n        </div>\r\n      </div>\r\n\r\n      <!-- Main Form Fields -->\r\n      <div  class=\"grid grid-cols-1 md:grid-cols-3 gap-6 mb-8\">\r\n        <!-- Characteristics Name -->\r\n        <mat-form-field appearance=\"outline\" class=\"w-full\">\r\n          <mat-label>Enter Characteristics Name <span class=\"text-red-500\">*</span></mat-label>\r\n          <input matInput [(ngModel)]=\"characteristicName\" placeholder=\"Leaf: length\">\r\n        </mat-form-field>\r\n\r\n        <!-- Type of Expression -->\r\n        <mat-form-field appearance=\"outline\" class=\"w-full\">\r\n          <mat-label>Type of Expression <span class=\"text-red-500\">*</span></mat-label>\r\n          <mat-select [(ngModel)]=\"expressionType\">\r\n            <mat-option *ngFor=\"let type of expressionTypes\" [value]=\"type\">\r\n              {{ type }}\r\n            </mat-option>\r\n          </mat-select>\r\n        </mat-form-field>\r\n\r\n        <!-- Growth Stage -->\r\n        <mat-form-field appearance=\"outline\" class=\"w-full\">\r\n          <mat-label>Growth Stage</mat-label>\r\n          <input matInput [(ngModel)]=\"growthStage\" placeholder=\"00\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <!-- Methods of Observation -->\r\n    <div class=\"mb-8\">\r\n        <h2 class=\"text-base font-medium text-gray-700 mb-4\">\r\n          Methods of Observation & Type of Plot <span class=\"text-red-500\">*</span>\r\n        </h2>\r\n        <div class=\"grid grid-cols-1 md:grid-cols-5 gap-4 mb-4\">\r\n          <mat-checkbox [(ngModel)]=\"mgChecked\" color=\"primary\" class=\"custom-checkbox\">\r\n            <span class=\"text-gray-700\">MG</span>\r\n          </mat-checkbox>\r\n          <mat-checkbox [(ngModel)]=\"msChecked\" color=\"primary\" class=\"custom-checkbox\">\r\n            <span class=\"text-gray-700\">MS</span>\r\n          </mat-checkbox>\r\n          <mat-checkbox [(ngModel)]=\"vgChecked\" color=\"primary\" class=\"custom-checkbox\">\r\n            <span class=\"text-gray-700\">VG</span>\r\n          </mat-checkbox>\r\n          <mat-checkbox [(ngModel)]=\"vsChecked\" color=\"primary\" class=\"custom-checkbox\">\r\n            <span class=\"text-gray-700\">VS</span>\r\n          </mat-checkbox>\r\n          <mat-checkbox [(ngModel)]=\"otherChecked\" color=\"primary\" class=\"custom-checkbox\">\r\n            <span class=\"text-gray-700\">OTHER</span>\r\n          </mat-checkbox>\r\n        </div>\r\n        <div class=\"flex gap-4\">\r\n          <mat-form-field appearance=\"outline\" class=\"w-40\">\r\n            <mat-label>Select</mat-label>\r\n            <mat-select [(ngModel)]=\"mgPlotType\">\r\n              <mat-option *ngFor=\"let type of plotTypes\" [value]=\"type\">\r\n                {{ type }}\r\n              </mat-option>\r\n            </mat-select>\r\n          </mat-form-field>\r\n          <mat-form-field appearance=\"outline\" class=\"w-40\">\r\n            <mat-label>Select</mat-label>\r\n            <mat-select [(ngModel)]=\"msPlotType\">\r\n              <mat-option *ngFor=\"let type of plotTypes\" [value]=\"type\">\r\n                {{ type }}\r\n              </mat-option>\r\n            </mat-select>\r\n          </mat-form-field>\r\n        </div>\r\n </div>\r\n\r\n      <!-- State Expressions -->\r\n      <div class=\"mb-6\" *ngFor=\"let state of stateExpressions; let i = index\">\r\n        <div class=\"grid grid-cols-1 md:grid-cols-3 gap-4\">\r\n          <!-- State of Expression -->\r\n          <div>\r\n            <mat-form-field appearance=\"outline\" class=\"w-full\">\r\n\r\n              <input matInput [(ngModel)]=\"state.state\" placeholder=\"Leaf: length\">\r\n            </mat-form-field>\r\n          </div>\r\n\r\n          <!-- Notes -->\r\n          <div>\r\n            <mat-form-field appearance=\"outline\" class=\"w-full\">\r\n\r\n              <mat-select [(ngModel)]=\"state.notes\">\r\n                <mat-option *ngFor=\"let note of noteOptions\" [value]=\"note\">\r\n                  {{ note }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field>\r\n          </div>\r\n\r\n          <!-- Example of Varieties -->\r\n          <div class=\"flex gap-2 items-start\">\r\n            <div class=\"flex-1 relative\">\r\n\r\n              <div class=\"flex items-center gap-2 border border-gray-300 rounded px-3 py-2 bg-white min-h-[56px] hover:border-gray-400 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100\">\r\n                <!-- Chips Display -->\r\n                <div class=\"flex flex-wrap gap-1.5 flex-1\">\r\n                  <span *ngFor=\"let variety of state.varieties; let vi = index\"\r\n                        class=\"inline-flex items-center gap-1 bg-lime-400 text-gray-900 text-sm font-medium px-2.5 py-1 rounded\">\r\n                    {{ variety }}\r\n                    <button (click)=\"removeVariety(i, vi)\" class=\"hover:opacity-70\" type=\"button\">\r\n                      <span class=\"text-gray-700 font-bold\">X</span>\r\n                    </button>\r\n                  </span>\r\n                </div>\r\n                <!-- Dropdown Arrow -->\r\n                <mat-icon class=\"text-gray-500 cursor-pointer\">arrow_drop_down</mat-icon>\r\n              </div>\r\n            </div>\r\n            <button mat-icon-button (click)=\"removeState(i)\" class=\"mt-5 text-gray-500 hover:text-red-600\">\r\n              <mat-icon>delete_outline</mat-icon>\r\n            </button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <!-- Add New State Button -->\r\n      <button mat-button (click)=\"addNewState()\" class=\"!text-green-600 !font-medium mb-8\">\r\n        <mat-icon class=\"!text-xl\">add</mat-icon>\r\n        Add new state\r\n      </button>\r\n\r\n      <!-- Explanation -->\r\n      <div class=\"mb-6\">\r\n        <mat-form-field appearance=\"outline\" class=\"w-full\">\r\n          <mat-label>Add explanation for this characteristic</mat-label>\r\n          <textarea matInput [(ngModel)]=\"explanation\" rows=\"4\"\r\n                    placeholder=\"Enter explanation...\"></textarea>\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <!-- Action Buttons -->\r\n      <div class=\"flex justify-end gap-4 pt-4 border-t border-gray-200\">\r\n        <button mat-stroked-button class=\"!px-8 !py-2\">\r\n          Cancel\r\n        </button>\r\n        <button mat-raised-button color=\"primary\" class=\"!px-8 !py-2 !bg-blue-600 !text-white hover:!bg-blue-700\">\r\n          Save\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n"
+        },
+        {
+            "name": "Page12",
+            "id": "component-Page12-4d2c04f80d5145ea78ab43334acbf60d596cd61ba5373e5f5641264b95f7c35ec4e45e52fa4e05a79710c71c32d64a56ca0ecac74cd816242a50b7df31a75b06",
+            "file": "src/app/components/page12/page12.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-page12",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./page12.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "noteOptions",
+                    "defaultValue": "['1', '2', '3', '4', '5']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 49
+                },
+                {
+                    "name": "stateExpressions",
+                    "defaultValue": "[\r\n    {\r\n      state: 'Leaf: length',\r\n      notes: '1',\r\n      varieties: ['1', '2', '3', '4']\r\n    },\r\n    {\r\n      state: 'Leaf: length',\r\n      notes: '2',\r\n      varieties: ['1', '2', '3', '4']\r\n    }\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StateExpression[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 36
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "removeState",
+                    "args": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 55,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "removeVariety",
+                    "args": [
+                        {
+                            "name": "stateIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "varietyIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 51,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "stateIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "varietyIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatFormFieldModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatInputModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatSelectModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatButtonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { MatFormFieldModule } from '@angular/material/form-field';\r\nimport { MatInputModule } from '@angular/material/input';\r\nimport { MatSelectModule } from '@angular/material/select';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatButtonModule } from '@angular/material/button';\r\n\r\ninterface StateExpression {\r\n  state: string;\r\n  notes: string;\r\n  varieties: string[];\r\n}\r\n\r\n@Component({\r\n\r\n  selector: 'app-page12',\r\n  imports:\r\n   [\r\n    CommonModule,\r\n    FormsModule,\r\n    MatFormFieldModule,\r\n    MatInputModule,\r\n    MatSelectModule,\r\n    MatIconModule,\r\n    MatButtonModule\r\n  ],\r\n\r\n  templateUrl: './page12.html',\r\n  styleUrl: './page12.css',\r\n\r\n})\r\n\r\nexport class Page12 {\r\n  stateExpressions: StateExpression[] = [\r\n    {\r\n      state: 'Leaf: length',\r\n      notes: '1',\r\n      varieties: ['1', '2', '3', '4']\r\n    },\r\n    {\r\n      state: 'Leaf: length',\r\n      notes: '2',\r\n      varieties: ['1', '2', '3', '4']\r\n    }\r\n  ];\r\n\r\n  noteOptions = ['1', '2', '3', '4', '5'];\r\n\r\n  removeVariety(stateIndex: number, varietyIndex: number) {\r\n    this.stateExpressions[stateIndex].varieties.splice(varietyIndex, 1);\r\n  }\r\n\r\n  removeState(index: number) {\r\n    if (this.stateExpressions.length > 1) {\r\n      this.stateExpressions.splice(index, 1);\r\n    }\r\n  }\r\n}\r\n",
+            "styleUrl": "./page12.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"min-h-screen bg-gray-50 p-8\">\r\n  <div class=\"max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-8\">\r\n\r\n    <!-- State Expressions -->\r\n    <div class=\"space-y-6\">\r\n      <div *ngFor=\"let state of stateExpressions; let i = index\" class=\"pb-6\">\r\n        <div class=\"grid grid-cols-1 md:grid-cols-3 gap-4\">\r\n\r\n          <!-- State of Expression -->\r\n          <div>\r\n            <mat-form-field appearance=\"outline\" class=\"w-full\">\r\n\r\n              <input matInput [(ngModel)]=\"state.state\" placeholder=\"Leaf: length\">\r\n            </mat-form-field>\r\n          </div>\r\n\r\n          <!-- Notes -->\r\n           \r\n          <div>\r\n            <mat-form-field appearance=\"outline\" class=\"w-full\">\r\n              <mat-label>Notes</mat-label>\r\n              <mat-select [(ngModel)]=\"state.notes\">\r\n                <mat-option *ngFor=\"let note of noteOptions\" [value]=\"note\">\r\n                  {{ note }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field>\r\n          </div>\r\n\r\n          <!-- Example of Varieties -->\r\n          <div class=\"flex gap-2 items-start\">\r\n            <div class=\"flex-1 relative\">\r\n\r\n              <div class=\"flex items-center gap-2 border border-gray-300 rounded px-3 py-2 bg-white min-h-[56px] hover:border-gray-400 focus-within:border-blue-500 transition-colors\">\r\n                <!-- Chips Display -->\r\n                <div class=\"flex flex-wrap gap-1.5 flex-1\">\r\n                  <span *ngFor=\"let variety of state.varieties; let vi = index\"\r\n                        class=\"inline-flex items-center gap-1 bg-lime-400 text-gray-900 text-sm font-medium px-2.5 py-1 rounded\">\r\n                    {{ variety }}\r\n                    <button (click)=\"removeVariety(i, vi)\" class=\"hover:opacity-70\" type=\"button\">\r\n                      <span class=\"text-gray-700 font-bold\">X</span>\r\n                    </button>\r\n                  </span>\r\n                </div>\r\n                <!-- Dropdown Arrow -->\r\n                <mat-icon class=\"text-gray-500 cursor-pointer\">arrow_drop_down</mat-icon>\r\n              </div>\r\n            </div>\r\n            <button mat-icon-button (click)=\"removeState(i)\" class=\"mt-5 text-gray-500 hover:text-red-600\">\r\n              <mat-icon>delete_outline</mat-icon>\r\n            </button>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n"
+        },
+        {
+            "name": "PageComponent",
+            "id": "component-PageComponent-21dd6eb370b4983b5c21c84d40e6f54d266a9d9af9889e6e76b35c43058bd53b3e451bad089d5adf4bea46647ba10265a2fa8cb15630398e75636307d4817fc6",
+            "file": "src/stories/page.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-page",
+            "styleUrls": [
+                "./page.css"
+            ],
+            "styles": [],
+            "template": "<article>  <storybook-header\n    [user]=\"user\"\n    (onLogout)=\"doLogout()\"\n    (onLogin)=\"doLogin()\"\n    (onCreateAccount)=\"doCreateAccount()\"\n  ></storybook-header>\n  <section class=\"storybook-page\">\n    <h2>Pages in Storybook</h2>\n    <p>\n      We recommend building UIs with a\n      <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n        <strong>component-driven</strong>\n      </a>\n      process starting with atomic components and ending with pages.\n    </p>\n    <p>\n      Render pages with mock data. This makes it easy to build and review page states without\n      needing to navigate to them in your app. Here are some handy patterns for managing page data\n      in Storybook:\n    </p>\n    <ul>\n      <li>\n        Use a higher-level connected component. Storybook helps you compose such data from the\n        \"args\" of child component stories\n      </li>\n      <li>\n        Assemble data in the page component from your services. You can mock these services out\n        using Storybook.\n      </li>\n    </ul>\n    <p>\n      Get a guided tutorial on component-driven development at\n      <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n        Storybook tutorials\n      </a>\n      . Read more in the\n      <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n      .\n    </p>\n    <div class=\"tip-wrapper\">\n      <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n      <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" fillRule=\"evenodd\">\n          <path\n            d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n            id=\"a\"\n            fill=\"#999\"\n          />\n        </g>\n      </svg>\n      Viewports addon in the toolbar\n    </div>\n  </section>\n</article>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "User | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 69
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "doCreateAccount",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 79,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "doLogin",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 75,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "doLogout",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 71,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "HeaderComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { HeaderComponent } from './header.component';\nimport type { User } from './user';\n\n@Component({\n  selector: 'storybook-page',\n  standalone: true,\n  imports: [CommonModule, HeaderComponent],\n  template: `<article>\n  <storybook-header\n    [user]=\"user\"\n    (onLogout)=\"doLogout()\"\n    (onLogin)=\"doLogin()\"\n    (onCreateAccount)=\"doCreateAccount()\"\n  ></storybook-header>\n  <section class=\"storybook-page\">\n    <h2>Pages in Storybook</h2>\n    <p>\n      We recommend building UIs with a\n      <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n        <strong>component-driven</strong>\n      </a>\n      process starting with atomic components and ending with pages.\n    </p>\n    <p>\n      Render pages with mock data. This makes it easy to build and review page states without\n      needing to navigate to them in your app. Here are some handy patterns for managing page data\n      in Storybook:\n    </p>\n    <ul>\n      <li>\n        Use a higher-level connected component. Storybook helps you compose such data from the\n        \"args\" of child component stories\n      </li>\n      <li>\n        Assemble data in the page component from your services. You can mock these services out\n        using Storybook.\n      </li>\n    </ul>\n    <p>\n      Get a guided tutorial on component-driven development at\n      <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n        Storybook tutorials\n      </a>\n      . Read more in the\n      <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n      .\n    </p>\n    <div class=\"tip-wrapper\">\n      <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n      <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" fillRule=\"evenodd\">\n          <path\n            d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n            id=\"a\"\n            fill=\"#999\"\n          />\n        </g>\n      </svg>\n      Viewports addon in the toolbar\n    </div>\n  </section>\n</article>`,\n  styleUrls: ['./page.css'],\n})\nexport class PageComponent {\n  user: User | null = null;\n\n  doLogout() {\n    this.user = null;\n  }\n\n  doLogin() {\n    this.user = { name: 'Jane Doe' };\n  }\n\n  doCreateAccount() {\n    this.user = { name: 'Jane Doe' };\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-page {\n  margin: 0 auto;\n  padding: 48px 20px;\n  max-width: 600px;\n  color: #333;\n  font-size: 14px;\n  line-height: 24px;\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n}\n\n.storybook-page h2 {\n  display: inline-block;\n  vertical-align: top;\n  margin: 0 0 4px;\n  font-weight: 700;\n  font-size: 32px;\n  line-height: 1;\n}\n\n.storybook-page p {\n  margin: 1em 0;\n}\n\n.storybook-page a {\n  color: inherit;\n}\n\n.storybook-page ul {\n  margin: 1em 0;\n  padding-left: 30px;\n}\n\n.storybook-page li {\n  margin-bottom: 8px;\n}\n\n.storybook-page .tip {\n  display: inline-block;\n  vertical-align: top;\n  margin-right: 10px;\n  border-radius: 1em;\n  background: #e7fdd8;\n  padding: 4px 12px;\n  color: #357a14;\n  font-weight: 700;\n  font-size: 11px;\n  line-height: 12px;\n}\n\n.storybook-page .tip-wrapper {\n  margin-top: 40px;\n  margin-bottom: 40px;\n  font-size: 13px;\n  line-height: 20px;\n}\n\n.storybook-page .tip-wrapper svg {\n  display: inline-block;\n  vertical-align: top;\n  margin-top: 3px;\n  margin-right: 4px;\n  width: 12px;\n  height: 12px;\n}\n\n.storybook-page .tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
+                    "styleUrl": "./page.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": []
+        }
+    ],
+    "modules": [],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "appConfig",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.config.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "ApplicationConfig",
+                "defaultValue": "{\r\n  providers: [\r\n    provideBrowserGlobalErrorListeners(),\r\n    provideRouter(routes)\r\n  ]\r\n}"
+            },
+            {
+                "name": "routes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.routes.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Routes",
+                "defaultValue": "[]"
+            }
+        ],
+        "functions": [],
+        "typealiases": [],
+        "enumerations": [],
+        "groupedVariables": {
+            "src/app/app.config.ts": [
+                {
+                    "name": "appConfig",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.config.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ApplicationConfig",
+                    "defaultValue": "{\r\n  providers: [\r\n    provideBrowserGlobalErrorListeners(),\r\n    provideRouter(routes)\r\n  ]\r\n}"
+                }
+            ],
+            "src/app/app.routes.ts": [
+                {
+                    "name": "routes",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.routes.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Routes",
+                    "defaultValue": "[]"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {}
+    },
+    "routes": {
+        "name": "<root>",
+        "kind": "module",
+        "children": []
+    },
+    "coverage": {
+        "count": 5,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "src/app/app.config.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "appConfig",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.routes.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "routes",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "App",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/footer/footer.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Footer",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/header/header.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Header",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/header/header.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "NavItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/page/page.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Page",
+                "coveragePercent": 0,
+                "coverageCount": "0/22",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/page/page.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "StateExpression",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/page12/page12.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Page12",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/page12/page12.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "StateExpression",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ButtonComponent",
+                "coveragePercent": 83,
+                "coverageCount": "5/6",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/stories/header.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/page.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/user.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "User",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            }
+        ]
+    }
+}

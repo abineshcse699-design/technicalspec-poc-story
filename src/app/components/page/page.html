@@ -1,0 +1,177 @@
+<div class="min-h-screen bg-gray-50 p-8">
+  <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-6 border-b border-gray-200">
+      <div>
+        <h1 class="text-2xl font-semibold text-gray-900">Edit Characteristics</h1>
+        <p class="text-sm text-gray-600 mt-1">Some fields are mandatory and must be completed (*)</p>
+      </div>
+      <button mat-icon-button class="!w-10 !h-10 bg-gray-900 text-white rounded-full hover:bg-gray-800">
+        
+        <mat-icon>close</mat-icon>
+
+      </button>
+
+    </div>
+
+    <div class="p-6">
+      <!-- Specific Functions -->
+      <div class="mb-8">
+        <h2 class="text-base font-medium text-gray-700 mb-4">Specific functions</h2>
+        <div class="flex gap-6">
+          <mat-checkbox [(ngModel)]="astericsChecked" color="primary" class="custom-checkbox">
+            <span class="text-gray-700">Asterics characteristic</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="groupingChecked" color="primary" class="custom-checkbox">
+            <span class="text-gray-700">Grouping characteristics</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="tq5Checked" color="primary" class="custom-checkbox">
+            <span class="text-gray-700">Add to TQ5 characteristics</span>
+          </mat-checkbox>
+        </div>
+      </div>
+
+      <!-- Main Form Fields -->
+      <div  class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Characteristics Name -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Enter Characteristics Name <span class="text-red-500">*</span></mat-label>
+          <input matInput [(ngModel)]="characteristicName" placeholder="Leaf: length">
+        </mat-form-field>
+
+        <!-- Type of Expression -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Type of Expression <span class="text-red-500">*</span></mat-label>
+          <mat-select [(ngModel)]="expressionType">
+            <mat-option *ngFor="let type of expressionTypes" [value]="type">
+              {{ type }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Growth Stage -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Growth Stage</mat-label>
+          <input matInput [(ngModel)]="growthStage" placeholder="00">
+        </mat-form-field>
+      </div>
+
+      <!-- Methods of Observation -->
+    <div class="mb-8">
+        <h2 class="text-base font-medium text-gray-700 mb-4">
+          Methods of Observation & Type of Plot <span class="text-red-500">*</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
+          <mat-checkbox [(ngModel)]="mgChecked" color="primary" class="custom-checkbox">
+            <span class="text-gray-700">MG</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="msChecked" color="primary" class="custom-checkbox">
+            <span class="text-gray-700">MS</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="vgChecked" color="primary" class="custom-checkbox">
+            <span class="text-gray-700">VG</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="vsChecked" color="primary" class="custom-checkbox">
+            <span class="text-gray-700">VS</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="otherChecked" color="primary" class="custom-checkbox">
+            <span class="text-gray-700">OTHER</span>
+          </mat-checkbox>
+        </div>
+        <div class="flex gap-4">
+          <mat-form-field appearance="outline" class="w-40">
+            <mat-label>Select</mat-label>
+            <mat-select [(ngModel)]="mgPlotType">
+              <mat-option *ngFor="let type of plotTypes" [value]="type">
+                {{ type }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-40">
+            <mat-label>Select</mat-label>
+            <mat-select [(ngModel)]="msPlotType">
+              <mat-option *ngFor="let type of plotTypes" [value]="type">
+                {{ type }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+ </div>
+
+      <!-- State Expressions -->
+      <div class="mb-6" *ngFor="let state of stateExpressions; let i = index">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- State of Expression -->
+          <div>
+            <mat-form-field appearance="outline" class="w-full">
+
+              <input matInput [(ngModel)]="state.state" placeholder="Leaf: length">
+            </mat-form-field>
+          </div>
+
+          <!-- Notes -->
+          <div>
+            <mat-form-field appearance="outline" class="w-full">
+
+              <mat-select [(ngModel)]="state.notes">
+                <mat-option *ngFor="let note of noteOptions" [value]="note">
+                  {{ note }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Example of Varieties -->
+          <div class="flex gap-2 items-start">
+            <div class="flex-1 relative">
+
+              <div class="flex items-center gap-2 border border-gray-300 rounded px-3 py-2 bg-white min-h-[56px] hover:border-gray-400 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100">
+                <!-- Chips Display -->
+                <div class="flex flex-wrap gap-1.5 flex-1">
+                  <span *ngFor="let variety of state.varieties; let vi = index"
+                        class="inline-flex items-center gap-1 bg-lime-400 text-gray-900 text-sm font-medium px-2.5 py-1 rounded">
+                    {{ variety }}
+                    <button (click)="removeVariety(i, vi)" class="hover:opacity-70" type="button">
+                      <span class="text-gray-700 font-bold">X</span>
+                    </button>
+                  </span>
+                </div>
+                <!-- Dropdown Arrow -->
+                <mat-icon class="text-gray-500 cursor-pointer">arrow_drop_down</mat-icon>
+              </div>
+            </div>
+            <button mat-icon-button (click)="removeState(i)" class="mt-5 text-gray-500 hover:text-red-600">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add New State Button -->
+      <button mat-button (click)="addNewState()" class="!text-green-600 !font-medium mb-8">
+        <mat-icon class="!text-xl">add</mat-icon>
+        Add new state
+      </button>
+
+      <!-- Explanation -->
+      <div class="mb-6">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Add explanation for this characteristic</mat-label>
+          <textarea matInput [(ngModel)]="explanation" rows="4"
+                    placeholder="Enter explanation..."></textarea>
+        </mat-form-field>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex justify-end gap-4 pt-4 border-t border-gray-200">
+        <button mat-stroked-button class="!px-8 !py-2">
+          Cancel
+        </button>
+        <button mat-raised-button color="primary" class="!px-8 !py-2 !bg-blue-600 !text-white hover:!bg-blue-700">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

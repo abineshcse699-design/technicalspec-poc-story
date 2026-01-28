@@ -1,0 +1,196 @@
+
+/* footer.component.scss - Matching Figma Design Exactly */
+
+#upov-footer {
+  background-color: #203938;
+  width: 100%;
+  font-family: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.footer-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 48px 143px 48px 143px;
+}
+
+.footer-content {
+  display: flex;
+  gap: 240px;
+}
+
+/* Logo Section */
+.footer-logo {
+  flex-shrink: 0;
+
+  a {
+    display: block;
+  }
+
+  img {
+    width: 91px;
+    height: 25px;
+    display: block;
+  }
+}
+
+/* Right Content Section */
+.footer-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Description Text */
+.footer-description {
+  margin: 0 0 16px 0;
+  font-family: 'Figtree', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28.8px;
+  color: #FFFFFF;
+}
+
+/* Social Media Icons */
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+
+  a {
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    border: 1px solid #FFFFFF;
+    background-color: #1C4240;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+  }
+}
+
+/* Divider Line */
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #FFFFFF;
+  margin-bottom: 16px;
+}
+
+/* Footer Links */
+.footer-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  a {
+    font-family: 'Figtree', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.2px;
+    color: #FFFFFF;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 1440px) {
+  .footer-container {
+    padding: 48px 80px;
+  }
+
+  .footer-content {
+    gap: 120px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer-container {
+    padding: 40px 60px;
+  }
+
+  .footer-content {
+    gap: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    padding: 40px 32px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footer-logo {
+    img {
+      width: 80px;
+      height: auto;
+    }
+  }
+
+  .footer-description {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    padding: 32px 16px;
+  }
+
+  .footer-content {
+    gap: 24px;
+  }
+
+  .footer-description {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .footer-social {
+    gap: 8px;
+
+    a {
+      width: 32px;
+      height: 32px;
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 12px;
+
+    a {
+      font-size: 14px;
+    }
+  }
+}

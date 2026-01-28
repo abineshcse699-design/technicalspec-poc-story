@@ -1,0 +1,59 @@
+<div class="min-h-screen bg-gray-50 p-8">
+  <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-8">
+
+    <!-- State Expressions -->
+    <div class="space-y-6">
+      <div *ngFor="let state of stateExpressions; let i = index" class="pb-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+          <!-- State of Expression -->
+          <div>
+            <mat-form-field appearance="outline" class="w-full">
+
+              <input matInput [(ngModel)]="state.state" placeholder="Leaf: length">
+            </mat-form-field>
+          </div>
+
+          <!-- Notes -->
+           
+          <div>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Notes</mat-label>
+              <mat-select [(ngModel)]="state.notes">
+                <mat-option *ngFor="let note of noteOptions" [value]="note">
+                  {{ note }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Example of Varieties -->
+          <div class="flex gap-2 items-start">
+            <div class="flex-1 relative">
+
+              <div class="flex items-center gap-2 border border-gray-300 rounded px-3 py-2 bg-white min-h-[56px] hover:border-gray-400 focus-within:border-blue-500 transition-colors">
+                <!-- Chips Display -->
+                <div class="flex flex-wrap gap-1.5 flex-1">
+                  <span *ngFor="let variety of state.varieties; let vi = index"
+                        class="inline-flex items-center gap-1 bg-lime-400 text-gray-900 text-sm font-medium px-2.5 py-1 rounded">
+                    {{ variety }}
+                    <button (click)="removeVariety(i, vi)" class="hover:opacity-70" type="button">
+                      <span class="text-gray-700 font-bold">X</span>
+                    </button>
+                  </span>
+                </div>
+                <!-- Dropdown Arrow -->
+                <mat-icon class="text-gray-500 cursor-pointer">arrow_drop_down</mat-icon>
+              </div>
+            </div>
+            <button mat-icon-button (click)="removeState(i)" class="mt-5 text-gray-500 hover:text-red-600">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
